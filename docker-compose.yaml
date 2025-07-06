@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: db_container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: account_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin1
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    build: .
+    container_name: account_container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/account_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin1
+    restart: always
+
+volumes:
+  db_data:
