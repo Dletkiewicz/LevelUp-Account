@@ -3,14 +3,14 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="create-table-users" author="dletkiewicz">
-        <createTable tableName="users">
+    <changeSet id="create-table-accounts" author="dletkiewicz">
+        <createTable tableName="accounts">
             <column name="id" type="uuid" defaultValueComputed="gen_random_uuid()">
-                <constraints primaryKey="true" primaryKeyName="users_pk" nullable="false"/>
+                <constraints primaryKey="true" primaryKeyName="accounts_pk" nullable="false"/>
             </column>
 
             <column name="username" type="varchar(15)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="uk_users_username"/>
+                <constraints nullable="false" unique="true" uniqueConstraintName="uk_accounts_username"/>
             </column>
 
             <column name="password_hash" type="varchar(255)">
@@ -18,7 +18,7 @@
             </column>
 
             <column name="email" type="citext">
-                <constraints nullable="false" unique="true" uniqueConstraintName="uk_users_email"/>
+                <constraints nullable="false" unique="true" uniqueConstraintName="uk_account_email"/>
             </column>
 
             <column name="role" type="varchar(15)" defaultValue="USER">
